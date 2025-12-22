@@ -124,19 +124,28 @@ const Index: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom Button */}
-        <div className="px-6 pb-10 z-20 shrink-0 animate-fade-in-up opacity-0 animation-delay-600">
-          <button
-            onClick={handleButtonClick}
-            className="w-full py-4 rounded-full font-semibold text-base sm:text-lg whitespace-nowrap text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-            style={{
-              background: 'linear-gradient(180deg, #42A5F5 0%, #1E88E5 100%)',
-              boxShadow: '0 4px 20px rgba(33, 150, 243, 0.4)',
-            }}
-          >
-            {translations[language].button}
-          </button>
-        </div>
+       {/* Bottom Button */}
+<div
+  className="sticky bottom-0 z-50 shrink-0 px-6 pt-3"
+  style={{
+    paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)',
+    background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))',
+    backdropFilter: 'blur(6px)',
+    WebkitBackdropFilter: 'blur(6px)',
+  }}
+>
+  <button
+    onClick={handleButtonClick}
+    className="w-full py-4 rounded-full font-semibold text-base sm:text-lg whitespace-nowrap text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+    style={{
+      background: 'linear-gradient(180deg, #42A5F5 0%, #1E88E5 100%)',
+      boxShadow: '0 4px 20px rgba(33, 150, 243, 0.4)',
+    }}
+  >
+    {translations[language].button}
+  </button>
+</div>
+
       </div>
     </div>
   );
