@@ -39,14 +39,21 @@
     @apply border-border;
   }
 
-  html, body, #root {
-    @apply h-full overflow-hidden;
-  }
-
-  body {
-    @apply bg-background text-foreground font-poppins antialiased;
-  }
+html, body {
+  height: 100%;
 }
+
+#root {
+  min-height: 100%;
+}
+
+/* Allow scrolling (especially on iOS Safari) */
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 
 /* Starry background - matching design */
 .starry-bg {
