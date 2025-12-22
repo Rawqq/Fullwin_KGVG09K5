@@ -47,7 +47,7 @@ const Index: React.FC = () => {
         </div>
 
         {/* Main Game Area - With floating decorations */}
-        <div className="flex-1 flex flex-col items-center justify-start pt-2 relative px-4 overflow-visible">
+        <div className="flex-1 flex flex-col items-center justify-start pt-2 relative px-4 overflow-visible pb-32">
           {/* === DECORATIVE ELEMENTS - Absolutely positioned === */}
 
           {/* Cloud 1 - Top of left mascot, bottom of right mascot */}
@@ -124,19 +124,20 @@ const Index: React.FC = () => {
           </div>
         </div>
 
-       {/* Bottom Button */}
+      {/* Bottom Button (Fixed for iOS Safari) */}
 <div
-  className="sticky bottom-0 z-50 shrink-0 px-6 pt-3"
+  className="fixed left-1/2 -translate-x-1/2 bottom-0 w-full max-w-[420px] px-6 z-[9999]"
   style={{
-    paddingBottom: 'calc(env(safe-area-inset-bottom) + 12px)',
-    background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))',
-    backdropFilter: 'blur(6px)',
-    WebkitBackdropFilter: 'blur(6px)',
+    paddingBottom: 'calc(env(safe-area-inset-bottom) + 14px)',
+    paddingTop: '12px',
+    background: 'linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0))',
+    backdropFilter: 'blur(8px)',
+    WebkitBackdropFilter: 'blur(8px)',
   }}
 >
   <button
     onClick={handleButtonClick}
-    className="w-full py-4 rounded-full font-semibold text-base sm:text-lg whitespace-nowrap text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+    className="w-full py-4 rounded-full font-semibold text-base sm:text-lg whitespace-nowrap text-white transition-all duration-200 active:scale-[0.98]"
     style={{
       background: 'linear-gradient(180deg, #42A5F5 0%, #1E88E5 100%)',
       boxShadow: '0 4px 20px rgba(33, 150, 243, 0.4)',
@@ -145,7 +146,6 @@ const Index: React.FC = () => {
     {translations[language].button}
   </button>
 </div>
-
       </div>
     </div>
   );
