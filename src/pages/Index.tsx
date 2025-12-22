@@ -40,7 +40,7 @@ const Index: React.FC = () => {
         </button>
 
         {/* Header Text */}
-        <div className="pt-6 px-6 text-center z-10 shrink-0">
+        <div className="pt-6 px-6 text-center z-50 shrink-0">
           <h1 className="text-[26px] font-bold text-white tracking-tight animate-fade-in-up opacity-0">
             {translations[language].welcome}
           </h1>
@@ -54,13 +54,13 @@ const Index: React.FC = () => {
           <img
             src={cloud1}
             alt=""
-            className="absolute -left-4 top-[-20px] w-[100px] h-auto z-40 animate-float"
+            className="absolute -left-4 top-[-20px] w-[100px] h-auto z-10 animate-float"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))' }}
           />
           <img
             src={cloud1}
             alt=""
-            className="absolute -right-4 top-[260px] w-[100px] h-auto z-40 animate-float scale-x-[-1]"
+            className="absolute -right-4 top-[260px] w-[100px] h-auto z-10 animate-float scale-x-[-1]"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))', animationDelay: '0.5s' }}
           />
 
@@ -68,13 +68,13 @@ const Index: React.FC = () => {
           <img
             src={cloud2}
             alt=""
-            className="absolute -left-4 top-[280px] w-[100px] h-auto z-40 animate-float"
+            className="absolute -left-4 top-[280px] w-[100px] h-auto z-10 animate-float"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))', animationDelay: '0.8s' }}
           />
           <img
             src={cloud2}
             alt=""
-            className="absolute -right-4 top-[-40px] w-[100px] h-auto z-40 animate-float scale-x-[-1]"
+            className="absolute -right-4 top-[-40px] w-[100px] h-auto z-10 animate-float scale-x-[-1]"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))', animationDelay: '1s' }}
           />
 
