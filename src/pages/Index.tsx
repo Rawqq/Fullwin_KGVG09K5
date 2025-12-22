@@ -54,7 +54,7 @@ const Index: React.FC = () => {
           <img
             src={cloud1}
             alt=""
-            className="absolute -left-4 top-[-20px] w-[100px] h-auto z-10 animate-float"
+            className="absolute -left-4 top-[20px] w-[100px] h-auto z-10 animate-float"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))' }}
           />
           <img
@@ -74,7 +74,7 @@ const Index: React.FC = () => {
           <img
             src={cloud2}
             alt=""
-            className="absolute -right-4 top-[-40px] w-[100px] h-auto z-10 animate-float scale-x-[-1]"
+            className="absolute -right-4 top-[0px] w-[100px] h-auto z-10 animate-float scale-x-[-1]"
             style={{ filter: 'drop-shadow(0 4px 8px rgba(0,0,0,0.3))', animationDelay: '1s' }}
           />
 
