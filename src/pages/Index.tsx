@@ -26,9 +26,9 @@ const Index: React.FC = () => {
   };
 
   return (
-    <div className="starry-bg min-h-screen h-screen w-full overflow-hidden flex justify-center">
+    <div className="starry-bg min-h-screen w-full overflow-x-hidden flex justify-center">
       {/* Main container - mobile width */}
-      <div className="relative w-full max-w-[420px] h-full flex flex-col overflow-visible">
+      <div className="relative w-full max-w-[420px] min-h-screen flex flex-col overflow-visible">
         {/* Language Toggle */}
         <button
           onClick={() => setLanguage((prev) => (prev === 'ru' ? 'en' : 'ru'))}
