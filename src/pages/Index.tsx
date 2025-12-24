@@ -22,7 +22,7 @@ const Index: React.FC = () => {
   const [language, setLanguage] = useState<'ru' | 'en'>('ru');
 
   const handleButtonClick = () => {
-    window.location.href = 'https://t.me/fullwin_official_bot/FULLWIN?startapp=KGVG09K5';
+    window.location.href = 'https://t.me/+IJCerDiyuJcwODhk';
   };
 
   return (
