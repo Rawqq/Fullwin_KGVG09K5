@@ -2,92 +2,103 @@ import React from "react";
 import { X } from "lucide-react";
 
 type Props = {
-  language?: "ru" | "en";
+  language?: "ru" | "en" | string;
 };
 
-const STORAGE_KEY = "open_in_browser_hint_dismissed_v1";
+const STORAGE_KEY = "open_in_browser_hint_dismissed_v3";
 
-function isMobileDevice() {
-  const ua = navigator.userAgent || "";
-  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(ua);
+function isMobile() {
+  if (typeof navigator === "undefined") return false;
+  return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
 }
 
-function isTikTokInAppBrowser() {
-  const ua = navigator.userAgent || "";
-  // TikTok user agents vary; these tokens cover most common cases.
-  return /tiktok|musical_ly|bytedance|aweme|ttwebview|zhiliaoapp|musically/i.test(ua);
+function isTikTokInApp() {
+  if (typeof navigator === "undefined") return false;
+  const ua = navigator.userAgent.toLowerCase();
+  return /tiktok|musical_ly|bytedance|aweme|ttwebview|zhiliaoapp|musically/.test(ua);
 }
 
 export default function OpenInBrowserHint({ language = "ru" }: Props) {
-  const [open, setOpen] = React.useState(false);
+  const [visible, setVisible] = React.useState(false);
 
   React.useEffect(() => {
     try {
-      if (!isMobileDevice()) return;
-      if (!isTikTokInAppBrowser()) return;
-      if (localStorage.getItem(STORAGE_KEY) === "1") return;
-      setOpen(true);
+      const dismissed = localStorage.getItem(STORAGE_KEY) === "1";
+      if (!dismissed && isMobile() && isTikTokInApp()) setVisible(true);
     } catch {
-      // If storage is blocked (some in-app browsers), still show the hint.
-      setOpen(true);
+      // ignore
     }
   }, []);
 
-  if (!open) return null;
+  if (!visible) return null;
 
+  // ✅ Текст оставляем как есть (как ты просил)
+  const title = language === "ru" ? "Откройте в браузере" : "Open in browser";
   const content =
-    language === "en"
-      ? {
-          title: "Open in browser",
-          text: "To open the Telegram app, tap the three dots in the top right and choose “Open in browser”.",
-        }
-      : {
-          title: "Откройте в браузере",
-          text: "Для того чтобы открыть приложение в Телеграме, нажмите на 3 точки справа сверху и выберите «Открыть в браузере».",
-        };
+    language === "ru"
+      ? "Для того чтобы открыть приложение в Телеграме, нажмите на 3 точки справа сверху и выберите «Открыть в браузере»."
+      : "To open the Telegram app, tap the three dots in the top right and choose “Open in browser”.";
 
   const dismiss = () => {
-    setOpen(false);
     try {
       localStorage.setItem(STORAGE_KEY, "1");
     } catch {
       // ignore
     }
+    setVisible(false);
   };
 
   return (
-    <div className="fixed right-4 top-14 z-[10000] w-[calc(100%-2rem)] max-w-[340px]">
-      {/* Pulse marker that "points" to the top-right (where the ⋯ menu usually is in TikTok) */}
-      <div className="pointer-events-none fixed right-2 top-2 z-[10001]">
-        <div className="relative h-3 w-3">
-          <span className="absolute inset-0 rounded-full bg-white/70 animate-ping" />
-          <span className="absolute inset-0 rounded-full bg-white" />
+    <>
+      {/* ✅ Красная стрелка к РЕАЛЬНЫМ ⋯ справа сверху */}
+      <svg
+        className="fixed inset-0 z-[10000] pointer-events-none"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <defs>
+          <marker
+            id="arrowHead"
+            markerWidth="6"
+            markerHeight="6"
+            refX="5"
+            refY="3"
+            orient="auto"
+          >
+            <path d="M0,0 L6,3 L0,6 Z" fill="red" />
+          </marker>
+          <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="0" stdDeviation="0.7" floodOpacity="0.35" />
+          </filter>
+        </defs>
+
+        {/* Линия стрелки: старт чуть ниже уведомления → конец в правый верхний угол */}
+        <path
+          d="M78 22 C86 18, 92 14, 96 8"
+          stroke="red"
+          strokeWidth="1.2"
+          fill="none"
+          markerEnd="url(#arrowHead)"
+          filter="url(#shadow)"
+        />
+      </svg>
+
+      {/* ✅ Уведомление (без левой иконки вообще) */}
+      <div className="fixed top-14 right-3 z-[9999] w-[310px] max-w-[92vw]">
+        <div className="relative rounded-2xl bg-black/80 text-white shadow-lg backdrop-blur px-4 py-3 pr-10 border-2 border-green-500 ring-2 ring-green-500/40">
+          <div className="text-[15px] font-semibold leading-snug">{title}</div>
+          <div className="mt-1 text-sm leading-snug">{content}</div>
+
+          <button
+            onClick={dismiss}
+            className="absolute top-2 right-2 p-1 rounded-full hover:bg-white/10 transition"
+            aria-label={language === "ru" ? "Закрыть" : "Close"}
+          >
+            <X size={16} />
+          </button>
         </div>
       </div>
-
-      <div className="relative rounded-2xl border border-white/15 bg-black/70 backdrop-blur-md p-3 shadow-2xl text-white">
-        {/* Speech-bubble pointer */}
-        <div className="pointer-events-none absolute -top-2 right-6 h-4 w-4 rotate-45 bg-black/70 border-l border-t border-white/15" />
-
-        <button
-          type="button"
-          onClick={dismiss}
-          aria-label="Close"
-          className="absolute right-2 top-2 rounded-full p-1 text-white/70 hover:text-white"
-        >
-          <X className="h-4 w-4" />
-        </button>
-
-        <div className="flex items-start gap-3 pr-6">
-          <div className="mt-0.5 flex h-9 w-9 items-center justify-center rounded-full bg-white/10">
-            <span className="text-lg leading-none">⋮</span>
-          </div>
-          <div className="text-sm leading-snug">
-            <div className="font-semibold">{content.title}</div>
-            <div className="mt-1 text-white/85">{content.text}</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
