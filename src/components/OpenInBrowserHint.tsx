@@ -66,7 +66,7 @@ export default function OpenInBrowserHint({ language = "ru" }: Props) {
             refY="3"
             orient="auto"
           >
-            <path d="M0,0 L6,3 L0,6 Z" fill="red" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="#22c55e" />
           </marker>
           <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="0" stdDeviation="0.7" floodOpacity="0.35" />
@@ -77,7 +77,7 @@ export default function OpenInBrowserHint({ language = "ru" }: Props) {
         <path
           d="M78 22 C86 18, 92 14, 96 8"
           stroke="red"
-          strokeWidth="1.2"
+          strokeWidth="#22c55e"
           fill="none"
           markerEnd="url(#arrowHead)"
           filter="url(#shadow)"
