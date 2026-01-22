@@ -66,7 +66,7 @@ export default function OpenInBrowserHint({ language = "ru" }: Props) {
             refY="3"
             orient="auto"
           >
-            <path d="M0,0 L6,3 L0,6 Z" fill="#22c55e" />
+            <path d="M0,0 L6,3 L0,6 Z" fill="red" />
           </marker>
           <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
             <feDropShadow dx="0" dy="0" stdDeviation="0.7" floodOpacity="0.35" />
@@ -77,7 +77,7 @@ export default function OpenInBrowserHint({ language = "ru" }: Props) {
         <path
           d="M78 22 C86 18, 92 14, 96 8"
           stroke="red"
-          strokeWidth="#22c55e"
+          strokeWidth="1.2"
           fill="none"
           markerEnd="url(#arrowHead)"
           filter="url(#shadow)"
@@ -86,7 +86,7 @@ export default function OpenInBrowserHint({ language = "ru" }: Props) {
 
       {/* ✅ Уведомление (без левой иконки вообще) */}
       <div className="fixed top-14 right-3 z-[9999] w-[310px] max-w-[92vw]">
-        <div className="relative rounded-2xl bg-black/80 text-white shadow-lg backdrop-blur px-4 py-3 pr-10 border-2 border-green-500 ring-2 ring-green-500/40">
+        <div className="relative rounded-2xl bg-black/80 text-white shadow-lg backdrop-blur px-4 py-3 pr-10 border-2 border-red-500 ring-2 ring-red-500/40">
           <div className="text-[15px] font-semibold leading-snug">{title}</div>
           <div className="mt-1 text-sm leading-snug">{content}</div>
 
