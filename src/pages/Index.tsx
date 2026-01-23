@@ -7,6 +7,8 @@ import blocks from '@/assets/blocks.png';
 import cosmicChest from '@/assets/cosmic-chest.png';
 import progressBar from '@/assets/progress-bar.png';
 import OpenInBrowserHint from '@/components/OpenInBrowserHint';
+import { tiktokTrack } from "@/lib/tiktokPixel";
+import { useEffect } from "react";
 
 const translations = {
   ru: {
@@ -21,10 +23,36 @@ const translations = {
 
 const Index: React.FC = () => {
   const [language, setLanguage] = useState<'ru' | 'en'>('ru');
+  useEffect(() => {
+  tiktokTrack("ViewContent", {
+    contents: [
+      {
+        content_id: "fullwin_kgvg09k5",
+        content_type: "product",
+        content_name: "FULLWIN Landing",
+      },
+    ],
+    value: 1,
+    currency: "USD",
+  });
+}, []);
 
   const handleButtonClick = () => {
-    window.location.href = 'https://t.me/fullwin_official_bot/FULLWIN?startapp=KGVG09K5';
-  };
++  tiktokTrack("InitiateCheckout", {
++    contents: [
++      {
++        content_id: "open_telegram",
++        content_type: "product",
++        content_name: "Open Telegram Button",
++      },
++    ],
++    value: 1,
++    currency: "USD",
++  });
+
+  window.location.href = 'https://t.me/fullwin_official_bot/FULLWIN?startapp=KGVG09K5';
+};
+
 
   return (
     <div className="starry-bg min-h-screen w-full overflow-x-hidden flex justify-center">
